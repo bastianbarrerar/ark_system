@@ -1,0 +1,29 @@
+<%- include('./partials/head.ejs')%>
+  <body class="d-flex flex-column min-vh-100">
+    <%- include('./partials/navbar.ejs')%>
+
+
+    
+    
+    <div class="container-fluid my-5">
+      <div class="w-25 mx-auto">
+      <h1>Log In</h1>
+      <form class="my-5">
+  <div class="mb-3">
+    <input type="email" class="form-control" name="email" placeholder="Email" id="email" aria-describedby="emailHelp" required>
+  </div>
+  <div class="mb-3">
+    <input type="password" class="form-control" name="password" placeholder="password" id="password" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+         </div>   
+    </div>
+    
+    <% let info %>
+    <div><%= info ? info : '' %></div>
+
+    <%- include('./partials/footer.ejs')%>
+  </body>
+</html>
+
