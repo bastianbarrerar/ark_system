@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
-const { validateToken, checkAuthenticated } = require("./JWT");
+const { validateToken, checkAuthenticated, logOut } = require("./JWT");
 
 
 //static files
@@ -30,6 +30,9 @@ app.get("/signin", checkAuthenticated, (req, res) => {
 app.get("/home", validateToken, (req, res) => {
   res.render("home.ejs", {title: "Home"});
 });
+
+app.get("/logout", logOut);
+
 
 //routes api
 

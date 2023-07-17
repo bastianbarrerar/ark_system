@@ -30,4 +30,10 @@ const checkAuthenticated = (req, res, next) => {
     return next();
   }
 };
-module.exports = {createTokens, validateToken, checkAuthenticated}
+
+const logOut = (req, res) => {
+res.clearCookie("access-token");
+res.redirect("/");
+};
+
+module.exports = {createTokens, validateToken, checkAuthenticated, logOut}
