@@ -8,12 +8,12 @@
     <div class="container-fluid my-5">
       <div class="w-25 mx-auto">
       <h1>Log In</h1>
-      <form class="my-5">
+      <form class="my-5" id="logInForm">
   <div class="mb-3">
-    <input type="email" class="form-control" name="email" placeholder="Email" id="email" aria-describedby="emailHelp" required>
+    <input type="email" class="form-control" name="email" placeholder="Email" id="logInEmail" aria-describedby="emailHelp">
   </div>
   <div class="mb-3">
-    <input type="password" class="form-control" name="password" placeholder="password" id="password" required>
+    <input type="password" class="form-control" name="password" placeholder="password" id="LogInPassword">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -24,6 +24,7 @@
     <div><%= info ? info : '' %></div>
 
     <%- include('./partials/footer.ejs')%>
+    <script src="/js/logInValidation.js"></script>
   </body>
 </html>
 

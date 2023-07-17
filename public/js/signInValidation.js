@@ -36,25 +36,32 @@ signInForm.addEventListener("submit", (e) => {
     alert("Password doesn't match");
     return;
   } else {
-    fetch("/api/v1/users/add", {
+    signIn(firstName.value, lastName.value, email.value, password.value);
+  }
+});
+
+const signIn = async(firstNameValue, lastNameValue, emailValue, passwordValue) => {
+  try {
+    const response = await fetch("/users/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        firstName: firstName.value,
-        lastName: lastName.value,
-        email: email.value,
-        password: password.value,
+        firstName: firstNameValue,
+        lastName: lastNameValue,
+        email: emailValue,
+        password: passwordValue,
       }),
-    }).then((res) => {
-      if (res.status == 201) {
+    });
+      if (await response.status == 201) {
         alert("user created successfully");
         window.location = "/";
       }
-      if (res.status == 202) {
+      if (await response.status == 202) {
         alert("can't create this user");
       }
-    });
+  } catch (error) {
+    console.log(error)
   }
-});
+}

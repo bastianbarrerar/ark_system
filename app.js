@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const cookieParser = require("cookie-parser");
+const { validateToken, checkAuthenticated } = require("./JWT");
+
 
 //static files
 app.use(express.static(__dirname + "/public"));
@@ -9,26 +12,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.set("views", __dirname + "/src/views");
+app.use(cookieParser());
 
 //routes front-end
-app.get("/", (req, res) => {
+app.get("/", checkAuthenticated, (req, res) => {
   res.render('index.ejs', {title: "Index"})
 });
 
-app.get("/login", (req, res) => {
-  res.render("login.ejs", {title: "Log In"});
+app.get("/login", checkAuthenticated, (req, res) => {
+  res.render("login.ejs", { title: "Log In" });
 });
 
-app.get("/signin", (req, res) => {
-  res.render("signin.ejs", {title: "Sign In"});
+app.get("/signin", checkAuthenticated, (req, res) => {
+  res.render("signin.ejs", { title: "Sign In" });
 });
 
-app.get("/home", (req, res) => {
+app.get("/home", validateToken, (req, res) => {
   res.render("home.ejs", {title: "Home"});
 });
 
 //routes api
 
-app.use("/api/v1/users", require("./src/routes/users.routes"));
+app.use("/users", require("./src/routes/users.routes"));
 
 module.exports = { app };
